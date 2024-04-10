@@ -19,7 +19,7 @@ figure = np.array([[0, 0, 0, 1],
 
 def create_win(title):
     win = GraphWin(title, xw, yw)
-    win.setBackground('white')
+    win.setBackground('green')
     return win
 
 
