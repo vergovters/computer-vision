@@ -7,22 +7,28 @@ Prlpd = np.array([[0, 0, 0, 1],
                   [st, 0, 0, 1],
                   [st, st, 0, 1],
                   [0, st, 0, 1],
-                  [0, 0, st * 5, 1],
-                  [st, 0, st * 5, 1],
-                  [st, st, st * 5, 1],
-                  [0, st, st * 5, 1]])
+                  [0, 0, st * 2, 1],
+                  [st, 0, st * 2, 1],
+                  [st, st, st * 2, 1],
+                  [0, st, st * 2, 1]])
 
 
 def shift_xyz(Figure, l, m, n):
     f = np.array([[1, 0, 0, l], [0, 1, 0, m], [0, 0, 1, n], [1, 0, 0, 1]])
     ft = f.T
-    return Figure.dot(ft)
+    Prxy = Figure.dot(ft)
 
-def insert_x(Figure, theta):
-    theta_rad = (3 / 14 * theta) / 180
-    f = np.array([[1, 0, 0, 0], [0, mt.cos(theta_rad), mt.sin(theta_rad), 0], [0, -mt.sin(theta_rad), mt.cos(theta_rad), 0], [0, 0, 0, 1]])
+    return Prxy
+
+
+def insert_x(Figure, TetaG):
+    TetaR = (3 / 14 * TetaG) / 180
+    f = np.array(
+        [[1, 0, 0, 0], [0, mt.cos(TetaR), mt.sin(TetaR), 0], [0, -mt.sin(TetaR), mt.cos(TetaR), 0], [0, 0, 0, 1]])
     ft = f.T
-    return Figure.dot(ft)
+    Prxy = Figure.dot(ft)
+
+    return Prxy
 
 
 def dimetri(Figure, TetaG1, TetaG2):
@@ -85,7 +91,7 @@ def vectorization(x1, y1, x2, y2):
             y_vectorized.append(lag_pol(x_values[i]))
 
             obj = Point(x_values[i], y_values[i])
-            obj.setFill('yellow')
+            obj.setFill('blue')
             obj.draw(win)
     else:
         lag_pol = create_lagrange_polynomial(y_values, x_values)
@@ -95,12 +101,12 @@ def vectorization(x1, y1, x2, y2):
             x_vectorized.append(lag_pol(y_values[i]))
 
             obj = Point(x_values[i], y_values[i])
-            obj.setFill('yellow')
+            obj.setFill('blue')
             obj.draw(win)
 
     for i in range(len(x_values)):
         obj = Point(x_vectorized[i], y_vectorized[i])
-        obj.setFill('blue')
+        obj.setFill('red')
         obj.draw(win)
 
     return vectorization
@@ -221,12 +227,12 @@ def PrlpdWizReal_G(PrxyDIM, Xmax, Ymax, Zmax):
     FlagP = 1 if (abs(Ay - Ymax) > abs(My - Ymax)) and (abs(By - Ymax) > abs(Iy - Ymax)) \
                  and (abs(Cy - Ymax) > abs(Fy - Ymax)) and (abs(Dy - Ymax) > abs(Ey - Ymax)) else 2
 
-    create_polygon(win, [Point(Ex, Ey), Point(Fx, Fy), Point(Ix, Iy), Point(Mx, My)], 'blue') if FlagP == 2 else None
-    create_polygon(win, [Point(Ax, Ay), Point(Bx, By), Point(Cx, Cy), Point(Dx, Dy)], 'violet') if FlagP == 1 else None
-    create_polygon(win, [Point(Bx, By), Point(Ix, Iy), Point(Fx, Fy), Point(Cx, Cy)], 'indigo') if FlagR == 1 else None
-    create_polygon(win, [Point(Ax, Ay), Point(Mx, My), Point(Ex, Ey), Point(Dx, Dy)], 'indigo') if FlagR == 2 else None
-    create_polygon(win, [Point(Ax, Ay), Point(Bx, By), Point(Ix, Iy), Point(Mx, My)], 'green') if FlagF == 2 else None
-    create_polygon(win, [Point(Dx, Dy), Point(Cx, Cy), Point(Fx, Fy), Point(Ex, Ey)], 'red') if FlagF == 1 else None
+    create_polygon(win, [Point(Ex, Ey), Point(Fx, Fy), Point(Ix, Iy), Point(Mx, My)], 'yellow') if FlagP == 2 else None
+    create_polygon(win, [Point(Ax, Ay), Point(Bx, By), Point(Cx, Cy), Point(Dx, Dy)], 'yellow') if FlagP == 1 else None
+    create_polygon(win, [Point(Bx, By), Point(Ix, Iy), Point(Fx, Fy), Point(Cx, Cy)], 'yellow') if FlagR == 1 else None
+    create_polygon(win, [Point(Ax, Ay), Point(Mx, My), Point(Ex, Ey), Point(Dx, Dy)], 'yellow') if FlagR == 2 else None
+    create_polygon(win, [Point(Ax, Ay), Point(Bx, By), Point(Ix, Iy), Point(Mx, My)], 'yellow') if FlagF == 2 else None
+    create_polygon(win, [Point(Dx, Dy), Point(Cx, Cy), Point(Fx, Fy), Point(Ex, Ey)], 'yellow') if FlagF == 1 else None
 
     return PrlpdWizReal_G
 
@@ -243,7 +249,7 @@ if __name__ == '__main__':
     n = m
 
 
-    win = GraphWin("3-D аралелепіпед", xw, yw)
+    win = GraphWin("3-D векторний паралелепіпед проекція на ХУ", xw, yw)
     win.setBackground('white')
     Prlpd1 = shift_xyz(Prlpd, l, m, n)
 
