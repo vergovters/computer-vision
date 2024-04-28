@@ -32,11 +32,11 @@ def image_recognition(image_entrance, contours, file_name):
 
     for contour in contours:
         perimeter = cv2.arcLength(contour, True)
-        approx = cv2.approxPolyDP(contour, 0.03 * perimeter, True)
+        approx = cv2.approxPolyDP(contour, 0.01 * perimeter, False)
 
         x, y, w, h = cv2.boundingRect(contour)
 
-        if len(approx) > 4 and w > 70 and h > 80:
+        if len(approx) > 5 and w > 50 and h > 50:
             cv2.drawContours(image_entrance, [approx], -1, (255, 0, 0), 4)  
 
     cv2.imwrite(file_name, image_entrance)
@@ -47,7 +47,7 @@ def image_recognition(image_entrance, contours, file_name):
 
 
 if __name__ == '__main__':
-    image_entrance = image_read("house_image3.jpg")
+    image_entrance = image_read("tank3.jpg")
 
     image_exit = image_processing(image_entrance)
 
