@@ -42,7 +42,6 @@ def image_recognition(image_entrance, contours, file_name):
     cv2.imwrite(file_name, image_entrance)
     plt.imshow(image_entrance)
     plt.show()
-
     return
 
 
