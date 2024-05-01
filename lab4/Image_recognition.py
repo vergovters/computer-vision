@@ -46,10 +46,10 @@ def image_recognition(image_entrance, contours, file_name):
 
 
 if __name__ == '__main__':
-    image_entrance = image_read("tank3.jpg")
+    image_entrance = image_read("tank.jpg")
 
     image_exit = image_processing(image_entrance)
 
     contours = image_contours(image_exit)
 
-    image_recognition(image_entrance, contours, "image_recognition3.jpg")
+    image_recognition(image_entrance, contours, "image_recognition1.jpg")
