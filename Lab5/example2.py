@@ -4,28 +4,28 @@ import utils
 
 def prepare_image(init):
     adjusted = utils.adjust_contrast_and_brightness(init, contrast=3, brightness=50)
-    # cv.imshow("Contrast and brightness", adjusted)
+    cv.imshow("Contrast and brightness", adjusted)
 
     k_means = utils.k_means(adjusted, k=10)
-    # cv.imshow("K-means", k_means)
+    cv.imshow("K-means", k_means)
 
     gray = cv.cvtColor(k_means, cv.COLOR_BGR2GRAY)
-    # cv.imshow("Gray", gray)
+    cv.imshow("Gray", gray)
 
     bil_blured = cv.bilateralFilter(gray, 7, 50, 50)
-    # cv.imshow("Bilateral blured", bil_blured)
+    cv.imshow("Bilateral blured", bil_blured)
 
     gauss_thresh = cv.adaptiveThreshold(bil_blured, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY_INV, 9, 5)
-    # cv.imshow("Thresh", gauss_thresh)
+    cv.imshow("Thresh", gauss_thresh)
 
     opening = cv.morphologyEx(gauss_thresh, cv.MORPH_OPEN, (3, 3))
-    # cv.imshow("Opening", opening)
+    cv.imshow("Opening", opening)
 
     return opening
 
 
 def ident_solar_panels(initial):
-    # cv.imshow("Initial example 2", initial)
+    cv.imshow("Initial example 2", initial)
 
     prepared = prepare_image(initial)
     contours, hierarchies = cv.findContours(prepared, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
