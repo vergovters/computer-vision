@@ -3,24 +3,24 @@ from graphics import *
 import time
 import numpy as np
 
-xw = 900
+xw = 1200
 yw = 900
 
-st = 80
-side = 150  # increasing side length for better visualization
+st = 100
+side =  100
 half_side = side / 2
 h = math.sqrt(side ** 2 - half_side ** 2)
 
 teta_d = 60
 teta = (3 / 14 * teta_d) / 180
 
-Sx = 1.6
+Sx = 1.4
 Sy = 1.2
 
 
 def create_win(title):
     win = GraphWin(title, xw, yw)
-    win.setBackground('yellow')
+    win.setBackground('green')
     return win
 
 
@@ -65,7 +65,7 @@ def scale_point(x, y):
     return total
 
 
-# Moving
+Moving
 win = create_win("2-D Moving")
 
 points = create_start_parallelogram()
@@ -111,12 +111,12 @@ x4, y4 = points[3]
 
 draw_parallelogram(win, Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4))
 
-stop = xw / side * 6
+stop = xw / side * 15
 stop = float(stop)
 ii = int(stop)
 
 for i in range(ii):
-    time.sleep(0.3)
+    time.sleep(0.1)
 
     total = move_point(x1, y1)
     total = rotate_point(total[0, 0], total[0, 1])
@@ -150,19 +150,19 @@ x4, y4 = points[3]
 
 draw_parallelogram(win, Point(x1, y1), Point(x2, y2), Point(x3, y3), Point(x4, y4))
 
-total = move_point(x1, y1, 20)
+total = move_point(x1, y1, 10)
 total = scale_point(total[0, 0], total[0, 1])
 x1, y1 = total[0][:2]
 
-total = move_point(x2, y2, 20)
+total = move_point(x2, y2, 10)
 total = scale_point(total[0, 0], total[0, 1])
 x2, y2 = total[0][:2]
 
-total = move_point(x3, y3, 20)
+total = move_point(x3, y3, 10)
 total = scale_point(total[0, 0], total[0, 1])
 x3, y3 = total[0][:2]
 
-total = move_point(x4, y4, 20)
+total = move_point(x4, y4, 10)
 total = scale_point(total[0, 0], total[0, 1])
 x4, y4 = total[0][:2]
 
