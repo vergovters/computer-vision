@@ -65,7 +65,7 @@ def scale_point(x, y):
     return total
 
 
-Moving
+#Moving
 win = create_win("2-D Moving")
 
 points = create_start_parallelogram()

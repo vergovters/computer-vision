@@ -223,7 +223,7 @@ def draw_sepia(draw, pix, x, y, depth):
 
 
 if __name__ == "__main__":
-    source_file = 'car.jpg'
+    source_file = 'R.jpg'
 
     brightness_change(source_file, "brightness.jpg", 100)
     shades_of_gray(source_file, "shades_of_gray.jpg")
